@@ -1,0 +1,25 @@
+<%- include('../../shared/includes/head', { pageTitle: 'All Products'}) %> <%# Value of Page Title - Hardcoded/Controller %>
+<link rel="stylesheet" href="/styles/products.css">
+<script src="/scripts/product-management.js" defer></script>
+</head>
+<body>
+    <%- include('../../shared/includes/header') %>
+    <main>
+        <h1>Product Administration </h1>
+        <section>
+            <h2>Manage Products</h2>
+            <p>
+                <a href="/admin/products/new" class="btn">Add Product</a>
+            </p>
+        </section>
+      <section>
+          <ul id="products-grid">
+            <% for (const product of products) { %> <%# logic for fetching data - go to backend %>
+            <li>
+                <%- include('../../shared/includes/product-item', { product: product }) %> <%# to make product(RHS) available in product-item.ejs that's why we add 2nd parameter key-value pair value = product(RHS is the product in loop) -- key = product(LHS) key used in that template %>
+            </li>
+            <% } %> 
+          </ul>
+      </section>
+    </main>
+<%- include('../../shared/includes/footer') %> <%# No need to add footer everytime manually  %>

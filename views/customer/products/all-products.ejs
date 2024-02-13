@@ -1,0 +1,16 @@
+<%- include('../../shared/includes/head', { pageTitle: 'All products'}) %> <%# Value of Page Title - Hardcoded/Controller %>
+<link rel="stylesheet" href="/styles/products.css">
+</head>
+<body>
+    <%- include('../../shared/includes/header') %>
+    <main>
+      <h1>All Products</h1>
+      <ul id="products-grid">
+        <% for(const product of products) { %>
+          <li>
+            <%- include('../../shared/includes/product-item', { product: product }) %> <%# to make product(RHS) available in product-item.ejs that's why we add 2nd parameter key-value pair value = product(RHS is the product in loop) -- key = product(LHS) key used in that template %>
+          </li>
+        <% } %>
+      </ul>
+    </main>
+<%- include('../../shared/includes/footer') %> <%# No need to add footer everytime manually  %>

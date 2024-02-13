@@ -1,0 +1,16 @@
+<article class="cart-item">
+  <div class="cart-item-info">
+    <h2><%= item.product.title %></h2>
+    <p>₹<span class="cart-item-price"><%= item.totalPrice.toFixed(2) %></span><span class="cart-product-price">(₹<%= item.product.price.toFixed(2) %>)</span>
+    </p>
+  </div>
+  <%# Every Cart item has its own form %>
+  <form class="cart-item-management" data-productid="<%= item.product.id %>" data-csrf="<%= locals.csrfToken %>">
+    <%# We can also set action and method attribute and let browser handle the
+    form submission but i don't want browser to do that I want sent my own JS
+    driven request so that it won't reload the page only update the parts and
+    also send the PATCH req -- since browser by default don't support%>
+    <input type="number" value="<%= item.quantity %>" required />
+    <button class="btn btn-alt">Update</button>
+  </form>
+</article>

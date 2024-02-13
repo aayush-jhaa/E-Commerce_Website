@@ -1,0 +1,29 @@
+<%- include('../../shared/includes/head', { pageTitle: 'Login'}) %> <%# Value of Page Title - Hardcoded/Controller %>
+    <link rel="stylesheet" href="/styles/forms.css">
+    <link rel="stylesheet" href="/styles/auth.css">
+</head>
+<body>
+    <%- include('../../shared/includes/header') %>
+    <main>
+      <h1>Login</h1>
+      <% if(inputData.errorMessage) { %> <%# -- inputData we use before property name -- error message -  If we have erroneous data %>
+        <section class="alert">
+            <h2>Invalid Credentials</h2>
+            <p><%= inputData.errorMessage  %></p>
+        </section>
+        <% } %>
+      <form action="/login" method="POST"> <%# stays POST request -- we might change something on server -- such that session to mark that user as logged in  %>
+        <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+        <p>
+            <label for="email">E-Mail</label> <%# what kind of value expected - Logically coonected to input by for and id attribute %>
+            <input type="email" id="email" name="email" value="<%= inputData.email %>" required> <%# name attribute - To extract the value enteredd by user in server side %>
+        </p>
+        <p>
+            <label for="password">Password</label> 
+            <input type="password" id="password" name="password" value="<%= inputData.password %>" required> 
+        </p>        
+        <button class="btn">Login</button>
+        <p id="switch-form"><a href="/signup">Create New User</a></p>
+      </form>  
+    </main>
+<%- include('../../shared/includes/footer') %> <%# No need to add footer everytime manually  %>

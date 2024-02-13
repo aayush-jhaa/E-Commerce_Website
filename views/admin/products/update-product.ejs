@@ -1,0 +1,11 @@
+<%- include('../../shared/includes/head', { pageTitle: 'Update Product'}) %> <%# Value of Page Title - Hardcoded/Controller %>
+<link rel="stylesheet" href="/styles/forms.css">
+<script src="/scripts/image-preview.js" defer ></script>
+</head>
+<body>
+    <%- include('../../shared/includes/header') %>
+    <main>
+        <h1>Update Product</h1>
+        <%- include('includes/product-form', { submitPath: '/admin/products/' + product.id, product: product, imageRequired: false }) %>
+    </main> <%# We're using product.id not ._id -- .id only exist if in my product model i pass productData into the constructor and hence id is added  %>
+<%- include('../../shared/includes/footer') %> <%# No need to add footer everytime manually  %>

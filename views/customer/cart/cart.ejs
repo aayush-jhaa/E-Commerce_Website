@@ -1,0 +1,36 @@
+<%- include('../../shared/includes/head', { pageTitle: 'Your Cart'}) %> <%# Value of Page Title - Hardcoded/Controller %>
+<script src="/scripts/cart-item-management.js" defer>q</script>
+<link rel="stylesheet" href="/styles/cart.css">
+</head>
+<body>
+    <%- include('../../shared/includes/header') %>
+    <main>
+      <h1>Your Cart</h1>
+      <%# Cart item is not a product but group of products shown once %>
+      <ul id="cart-items">
+        <% for (const cartItem of locals.cart.items) { %> <%# Loop through cart item therfore we need cart data - cart available in locals property %>
+            <li>
+                <%- include("includes/cart-item", { item: cartItem })  %>
+            </li>
+        <% } %>    
+      </ul>
+        <div id="cart-total">
+            <p>Total: ₹<span id="cart-total-price"><%= locals.cart.totalPrice.toFixed(2) %></span></p>
+
+            <% if(locals.isAuth && locals.cart.totalQuantity > 0) { %>
+                <form action="/orders" method="POST"> 
+                    <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+                    <%# Where the form data that shoukd go into the form -- 
+                    We dont need form data here bccoz we already have cart which is part of user session and session stored on server side 
+                    therefore, In the routes that handle the orders, we'll able to look into the session to see the cart of that user 
+                    -- since it is already on server side no problem %>
+                    <button class="btn">Buy Now</button>
+                </form>
+            <% } else if(locals.isAuth && locals.cart.totalQuantity === 0 ) { %>
+                <p id="cart-total-fallback"> Add items to proceed and purchase the items.</p>
+            <% } else { %>     
+                <p id="cart-total-fallback"><a href="/login">Login to purchase the items!</a></p>
+            <% } %>
+        </div>
+    </main>
+<%- include('../../shared/includes/footer') %> <%# No need to add footer everytime manually  %>
